@@ -57,7 +57,7 @@ jobs:
             auto-activate-base: false
             python-version: ${{ matrix.python-version }}
       
-      - name: Setup PyMOL on ${{ matrix.os }} - py${{ matrix.python-version }}
+      - name: Setup conda env on ${{ matrix.os }} - py${{ matrix.python-version }}
         run: |
           conda install -c conda-forge openmm pdbfixer -n ${{ env.conda_env }} -y 
           conda info
@@ -67,12 +67,18 @@ jobs:
       - name: Install LigandMPNN on ${{ matrix.os }}
         run: |
           pip install .
-          pip install .[openfold]
 
-      - name: Full Unit Test on Ubuntu
+      - name: Unit Test on ${{ matrix.os }} w/o SC
         run: |
           bash ./run_examples.sh
           bash ./score_examples.sh
+
+      - name: Install OpenFold on ${{ matrix.os }}
+        run: |
+          pip install .[openfold]
+  
+      - name: Unit Test on ${{ matrix.os }} w/ SC
+        run: |
           bash ./sc_examples.sh
 
       
