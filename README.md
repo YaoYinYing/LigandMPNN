@@ -1,4 +1,4 @@
-## LigandMPNN
+# LigandMPNN
 
 This package provides inference code for [LigandMPNN](https://www.biorxiv.org/content/10.1101/2023.12.22.573103v1) & [ProteinMPNN](https://www.science.org/doi/10.1126/science.add2187) models. The code and model parameters are available under the MIT license.
 
@@ -7,7 +7,7 @@ Third party code: side chain packing uses helper functions from [Openfold](https
 ---
 **Note**: This fork is a modified version of the original LigandMPNN code.
 
-### Main Feature of this fork
+## Main Feature of this fork
 
 1. A pip-installable package for dependency management:
 2. Using `hydra` for config management: `ligandmpnn/config/ligandmpnn.yaml`.
@@ -26,9 +26,9 @@ Third party code: side chain packing uses helper functions from [Openfold](https
 - For detailed examples, ckeck example scripts: `run_examples.sh`, `sc_examples.sh`, `score_examples.sh`
 - Latest CI: [status](https://github.com/YaoYinYing/LigandMPNN/actions/workflows/unit_tests_tag.yml)
 
-### Running the code
+## Running the code
 
-#### Installation
+### Installation
 
 ```shell
 # from github
@@ -40,7 +40,7 @@ pip install .
 pip install .[openfold]
 ```
 
-#### Getting started
+### Getting started
 
 ```shell
 # design
@@ -50,7 +50,7 @@ ligandmpnn input.pdb="./inputs/1BC8.pdb" output.folder="./test/default"
 ligandmpnn runtime.mode.use='score' model_type.use='ligand_mpnn' input.pdb="./outputs/ligandmpnn_default/backbones/1BC8_1.pdb" output.folder="./test/scorer" scorer.use_sequence=False sampling.number_of_batches=10 runtime.force_cpu=True
 ```
 
-### Main differences compared with [ProteinMPNN](https://github.com/dauparas/ProteinMPNN) code
+## Main differences compared with [ProteinMPNN](https://github.com/dauparas/ProteinMPNN) code
 
 - Input PDBs are parsed using [Prody](https://pypi.org/project/ProDy/) preserving protein residue indices, chain letters, and insertion codes. If there are missing residues in the input structure the output fasta file won't have added `X` to fill the gaps. The script outputs .fasta and .pdb files. It's recommended to use .pdb files since they will hold information about chain letters and residue indices.
 - Adding bias, fixing residues, and selecting residues to be redesigned now can be done using residue indices directly, e.g. A23 (means chain A residue with index 23), B42D (chain B, residue 42, insertion code D).
@@ -79,7 +79,7 @@ Designing protein from this path: ./inputs/1BC8.pdb
 These residues will be redesigned:  ...
 ```
 
-### Available models
+## Available models
 
 To run the model of your choice specify `--model_type` and optionally the model checkpoint path. Available models:
 
