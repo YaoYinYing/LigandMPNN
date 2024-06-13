@@ -247,6 +247,14 @@ ligandmpnn \
         input.parse_these_chains_only="B"
 
 #34
+ligandmpnn \
+        model_type.use="ligand_mpnn" \
+        sampling.seed=111 \
+        input.pdb="./inputs/1BC8.pdb" \
+        output.folder="./outputs/parse_atoms_with_zero_occupancy" \
+        input.parse_atoms_with_zero_occupancy=True
+
+#35
 mkdir -p customized_weight_dir_local
 curl 'https://files.ipd.uw.edu/pub/ligandmpnn/proteinmpnn_v_48_002.pt' -o customized_weight_dir_local/customized_proteinmpnn_v_48_002.pt
 ls customized_weight_dir_local
@@ -258,7 +266,7 @@ ligandmpnn \
         output.folder="./outputs/default_customozed_weight_local"
 
 
-#35
+
 mkdir -p customized_weight_dir_remote
 ligandmpnn \
         sampling.seed=111 \
@@ -270,7 +278,7 @@ ligandmpnn \
 ls customized_weight_dir_remote
 
 
-#36
+
 mkdir -p customized_weight_dir_remote_hash
 ligandmpnn \
         sampling.seed=111 \
