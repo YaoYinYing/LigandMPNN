@@ -1013,9 +1013,9 @@ def tensor_to_sequence(tensor:torch.Tensor)-> str:
     return ''.join(restype_int_to_str[AA] for AA in tensor.cpu().numpy())
     
 
-def sequence_to_tensor(sequence: str) -> torch.Tensor:
+def sequence_to_tensor(sequence: str, device: torch.device=torch.device("cpu")) -> torch.Tensor:
     # restype_str_to_int is the inverse dictionary of restype_int_to_str
-    tensor = torch.tensor([restype_str_to_int[AA] for AA in sequence])
+    tensor = torch.tensor([restype_str_to_int[AA] for AA in sequence],device=device)
     tensor = tensor.unsqueeze(0)
     return tensor
 
@@ -1026,7 +1026,7 @@ def inspect_tensors(out_dict: Dict[str,Union[Any, torch.Tensor]]):
         if isinstance(j, torch.Tensor):
             if (_l:=len(j))==1:
                 _j=j[0]
-                print(f'{i}: L={_l}\tS={j.shape} S[0]={_j.shape}')
+                print(f'{i} (device={j.device}): L={_l}\tS={j.shape} S[0]={_j.shape}')
             else:
                 print(f'{i}: L={_l}\tS={j.shape}')
         else:

@@ -1449,7 +1449,7 @@ class MPNN_designer:
             print(f'{self.feature_dict.S.shape}')
 
             if customized_seq != '' and customized_seq is not None:
-                customized_sequence=sequence_to_tensor(self.cfg.scorer.customized_seq)
+                customized_sequence=sequence_to_tensor(self.cfg.scorer.customized_seq,device=self.device)
                 print(f'{customized_sequence.shape=}')
                 # Decide whether to use the predefined sequence or the custom sequence
             

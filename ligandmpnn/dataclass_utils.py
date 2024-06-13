@@ -266,7 +266,7 @@ class MPNN_designs:
         return {'seq': np.array([s for d in self.designs for s in d.Sequences]) }
 
     def _get_loss(self)-> Dict[str, np.array]:
-        return {'score': np.array([l for d in self.designs for l in d.loss_XY]) }
+        return {'score': np.array([l.cpu() for d in self.designs for l in d.loss_XY]) }
 
 @dataclass
 class MPNN_sequence(ABC):
