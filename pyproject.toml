@@ -55,3 +55,4 @@ openfold = ["absl-py", "ml_collections","dm-tree","modelcif", "openfold"]
 
 [tool.poetry.scripts]
 ligandmpnn = "ligandmpnn:run"
+ligandmpnn_download_weights = "ligandmpnn.dataclass_utils:download_all_weights"

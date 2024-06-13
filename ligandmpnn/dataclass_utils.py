@@ -1,5 +1,7 @@
+from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
 from dataclasses import dataclass, field
 import dataclasses
+import os
 from typing import Any, Dict, List, Literal, Tuple, Union
 from immutabledict import immutabledict
 from abc import ABC, abstractmethod
@@ -399,7 +401,8 @@ class MPNN_weights:
             "ligandmpnn_sc_v_32_002_16": "9c5c2b71e8d449522ba8d9332a47b7bf",
         }
     )
-    base_url = "https://files.ipd.uw.edu/pub/ligandmpnn/"
+    # switch to github release for weights
+    base_url:str = "https://github.com/YaoYinYing/LigandMPNN/releases/download/weights/"
 
     def fetch_all_weights(self, download_dir):
         for m in self.model2md5.keys():
@@ -418,3 +421,23 @@ class MPNN_weights:
             path=download_dir,
             progressbar=True,
         )
+
+def download_all_weights():
+    parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
+    parser.add_argument(
+        "dir",
+        default="dir",
+        help="Directory for download all weights.",
+    )
+
+    parser.add_argument(
+        "-m",
+        "--mirror",
+        default="https://files.ipd.uw.edu/pub/ligandmpnn/",
+        help="Mirror sites(base url) for download all weights.",
+        required=False,
+    )
+
+    args = parser.parse_args()
+    os.makedirs(args.dir,exist_ok=True)
+    MPNN_weights(base_url=args.mirror).fetch_all_weights(download_dir=args.dir)
